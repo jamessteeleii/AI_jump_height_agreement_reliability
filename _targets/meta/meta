@@ -1,0 +1,9 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+make_reli_plot|function|02f8751b9076cb3b
+make_agree_plot|function|36e31d3da66a5776
+fit_agree_models|function|cc8be0562f4efb53
+make_plot_tiff|function|ae5dc1809ded3893
+prepare_data|function|6b982a1619532e4a
+fit_reli_models|function|a7679c4abaaa39f8
+file|stem|555fd895394f02a0|3fb55da813d7c92c|2c530c1562a7fbd1|1735323524|data/AI_JUMP_DATA.csv|t19906.4451154458s|cef5f00334628e8b|2991|file|local|vector|||2.06||
+data|stem|034e043e778daa9c|52ed495c015e2bb6|8ffe2833c4fae5cb|33550471||t19906.4503112008s|7404e4423c1589e1|1762|rds|local|vector|||0.31||
