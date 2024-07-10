@@ -7,7 +7,8 @@ format:
     highlight-style: github
     prefer-html: true
 bibliography: 
-  references.bib
+  - references.bib
+  - grateful-refs.bib
 csl: apa.csl
 ---
 
@@ -72,7 +73,7 @@ $$
 with the square root of the total variance providing an estimate of the standard deviation of the differences for use in the conventional Bland-Altman limits of agreement calculation. A model was fit for each method in order to examine its test-retest reliability.
 
 ## Open data, code, and materials
-All data and code is presented in the supplementary materials (https://osf.io/z9q2k/).  The `renv` package was used for package version reproducibility and a function based analysis pipeline using the `targets` package was employed (the analysis pipeline can be viewed by downloading the R Project and running the function `targets::tar_visnetwork()`). We cite all packages used in the analysis pipeline below.
+All data and code is presented in the supplementary materials (<https://osf.io/z9q2k/>).  The `renv` package was used for package version reproducibility and a function based analysis pipeline using the `targets` package was employed (the analysis pipeline can be viewed by downloading the R Project and running the function `targets::tar_visnetwork()`). We cite all packages used in the analysis pipeline below using the `grateful` package [@rodriguez-sanchezGratefulFacilitateCitation2023]:
 
 ```{r}
 #| message: false
@@ -106,8 +107,8 @@ The mean bias and limits of agreement along with their bootstrapped interval est
 #| warning: false
 #| echo: false
 #| label: fig-agree-plot 
-#| fig-width: 12.5
-#| fig-height: 7.5
+#| fig-width: 6.25
+#| fig-height: 5
 #| fig-cap: Mean bias (thick horizontal line) and 95% limits of agreement (dotted horizontal lines) along with 95% quantile interval estimates for agreement of My Jump Lab Artificial Intelligence mode in comparison to the gold-standard (Force Decks impulse-momentum method).
 
 agree_plot
@@ -124,7 +125,7 @@ The mean bias and limits of agreement along with their bootstrapped interval est
 #| echo: false
 #| label: fig-reli-plot 
 #| fig-width: 10
-#| fig-height: 10
+#| fig-height: 5
 #| fig-cap: Mean bias (thick horizontal line) and 95% limits of agreement (dotted horizontal lines) along with 95% quantile interval estimates for each the test-retest reliability of method between sessions.
 
 reli_plot
