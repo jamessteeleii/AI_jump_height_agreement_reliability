@@ -1,0 +1,134 @@
+---
+title: "Statistical Analysis and Results"
+format: 
+  docx:
+    toc: false
+    number-sections: true
+    highlight-style: github
+    prefer-html: true
+bibliography: 
+  references.bib
+csl: apa.csl
+---
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| include: false
+
+
+knitr::opts_chunk$set(echo = TRUE, fig.align="center")
+options(knitr.kable.NA = '')
+
+library(patchwork)
+library(grateful)
+
+```
+
+# Statistical Analysis
+
+The present analysis was not pre-registered as we had no a priori hypotheses and, given the limited sample size due to resource constraints, was considered exploratory. Inferential statistics were treated as highly unstable local descriptions of the relations between model assumptions and data in order to acknowledge the inherent uncertainty in drawing generalised inferences from single and small samples [@amrheinInferentialStatisticsDescriptive2019]. For all analyses we opted to take an estimation-based approach typical when examining validity and reliability. That is, we provide point estimates and the uncertainty in them for the statistical parameters reported. Two sets of models were employed exploring the JHs recorded from CMJ trials; one to examine the agreement between the two methods, and one to explore the test-retest reliability for each method. Given we had nested data whereby each participant provided three trials for each method on two separate testing sessions we adopted a mixed effects limits of agreement approach [@parkerUsingMultipleAgreement2020]. This allowed us to estimate mean bias for each method compared with the gold-standard for agreement utilising both first and second session data, and any test retest bias for reliability, in addition to to upper and lower limits of agreement providing 95% coverage probabilities for both agreement and test-retest reliability. Models were fit using the `lme4` package and using Restricted Maximum Likelihood Estimation. For each of the models fit we used nonparametric case based bootstrapping resampling 10000 times at the individual participant level and refitting models in order to construct 95% quantile intervals for both the mean bias and limits of agreement estimates. Bootstrapping was performed using the `lmeresampler` package.
+
+## Agreement
+For estimation of bias and limits of agreement regarding the agreement between the gold-standard Force-Decks and impulse momentum method with the My Jump Lab Artificial Intelligence mode we utilised the following mixed effects model structure:
+
+$$
+\begin{aligned}
+  D_{ist} &= \mu + \alpha_i + \gamma_s + \epsilon_{ist} \\ 
+  \alpha_{i}  &\sim N (0, \sigma^2_{\alpha}) \\
+    \gamma_{s}  &\sim N (0, \sigma^2_{\gamma}) \\
+      \epsilon_{ist}  &\sim N (0, \sigma^2_{\epsilon})
+\end{aligned}
+$$ 
+
+Where $D_{ist}$ is the difference between measurements taken between the two methods (i.e., $y_{ist2}-y_{ist1}$), where the method indexed by $1$ is the gold-standard and method indexed by $2$ is the comparison method, for participant $i$ during session $s$ and for trial $t$. Here $\mu$ is the overall mean of the between method differences (i.e., the mean bias), $\alpha_i$ is the random effect for the $i^{th}$ participant,$\gamma_s$ is the random effect for the $s^{th}$ session which is nested within participant, and $\epsilon_{ist}$ is the error term. The 95% limits of agreement can then be calculated as:
+
+$$
+\begin{aligned}
+  \mu \pm 1.96\sqrt{\sigma^2_{\alpha}+\sigma^2_{\gamma}+\sigma^2_{\epsilon}}
+\end{aligned}
+$$ 
+with the square root of the total variance providing an estimate of the standard deviation of the differences for use in the conventional Bland-Altman limits of agreement calculation. A model was fit for each method in comparison o the gold-standard.
+
+## Reliability
+For estimation of bias and limits of agreement regarding the test-retest reliability between each test session for each method we utilised the following mixed effects model structure:
+
+$$
+\begin{aligned}
+  D^*_{it} &= \mu^* + \alpha^*_i + \epsilon^*_{it} \\ 
+  \alpha^*_{i}  &\sim N (0, \sigma^2_{\alpha^*}) \\
+      \epsilon^*_{it}  &\sim N (0, \sigma^2_{\epsilon^*})
+\end{aligned}
+$$ 
+
+Where $D_{it}$ is the difference between measurements taken between the two sessions for a given method (i.e., $y_{it2}-y_{it1}$), where the session indexed by $1$ is the first test session and the session indexed by $2$ is the second test session, for participant $i$ and for trial $t$ (note we use the superscript $*$ to distinguish this from the agreement model. Here $\mu^*$ is the overall mean of the between session differences (i.e., the mean bias), $\alpha^*_i$ is the random effect for the $i^{th}$ participant, and $\epsilon^*_{it}$ is the error term. The 95% limits of agreement can then be calculated as:
+
+$$
+\begin{aligned}
+  \mu^* \pm 1.96\sqrt{\sigma^2_{\alpha^*}+\sigma^2_{\epsilon^*}}
+\end{aligned}
+$$ 
+with the square root of the total variance providing an estimate of the standard deviation of the differences for use in the conventional Bland-Altman limits of agreement calculation. A model was fit for each method in order to examine its test-retest reliability.
+
+## Open data, code, and materials
+All data and code is presented in the supplementary materials (https://osf.io/z9q2k/).  The `renv` package was used for package version reproducibility and a function based analysis pipeline using the `targets` package was employed (the analysis pipeline can be viewed by downloading the R Project and running the function `targets::tar_visnetwork()`). We cite all packages used in the analysis pipeline below.
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+
+cite_packages(output = "paragraph", out.dir = ".")
+```
+
+# Results
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+
+targets::tar_load(agree_model)
+targets::tar_load(reli_models)
+targets::tar_load(agree_plot)
+targets::tar_load(reli_plot)
+
+
+```
+
+## Agreement
+
+The mean bias and limits of agreement along with their bootstrapped interval estimates can be seen for the agreement  between methods in @fig-agree-plot along with the raw data. The My Jump Lab Artificial Intelligence mode showed a mean bias of `r round(agree_model$mean_bias, 2)` cm [95% CI: `r round(agree_model$lower_ci_mean, 2)`, `r round(agree_model$upper_ci_mean, 2)`] overestimation with 95% limits of agreement ranging from `r round(agree_model$l_loa, 2)` cm [95% CI: `r round(agree_model$lower_ci_l_loa , 2)`, `r round(agree_model$upper_ci_l_loa , 2)`] to `r round(agree_model$u_loa, 2)` cm [95% CI: `r round(agree_model$lower_ci_u_loa , 2)`, `r round(agree_model$upper_ci_u_loa , 2)`].
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-agree-plot 
+#| fig-width: 12.5
+#| fig-height: 7.5
+#| fig-cap: Mean bias (thick horizontal line) and 95% limits of agreement (dotted horizontal lines) along with 95% quantile interval estimates for agreement of My Jump Lab Artificial Intelligence mode in comparison to the gold-standard (Force Decks impulse-momentum method).
+
+agree_plot
+
+```
+
+## Reliability
+
+The mean bias and limits of agreement along with their bootstrapped interval estimates can be seen for the test-retest reliability of each method between sessions in @fig-reli-plot along with the raw data. Both methods demonstrated minimal mean bias between sessions each typically less than 1 cm, and both demonstrated a similar width to their limits of agreement ranging ~7 cm about the mean bias. 
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| label: fig-reli-plot 
+#| fig-width: 10
+#| fig-height: 10
+#| fig-cap: Mean bias (thick horizontal line) and 95% limits of agreement (dotted horizontal lines) along with 95% quantile interval estimates for each the test-retest reliability of method between sessions.
+
+reli_plot
+
+```
+
+# References

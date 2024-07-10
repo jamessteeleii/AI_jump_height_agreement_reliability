@@ -3,7 +3,7 @@ library(targets)
 library(tarchetypes)
 source("R/functions.R")
 tar_option_set(packages = c("tidyverse", "lme4", "lmeresampler",
-                            # "quarto", "kableExtra", 
+                            "quarto", 
                             "patchwork"))
 
 list(
@@ -24,8 +24,8 @@ list(
   )),
   tar_target(reli_plot_tiff, make_plot_tiff(
     reli_plot, "plots/reli_plot.tiff", 10, 5, "tiff", 300
-  ))
-  
+  )),
+
   # Analysis and Results write up
-  # tar_quarto(report, path = "report.qmd")
+  tar_quarto(report, path = "report.qmd")
 )
