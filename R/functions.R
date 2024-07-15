@@ -172,13 +172,13 @@ make_agree_plot <- function(data, agree_model) {
     geom_text(label = glue::glue("Bias = {round(agree_model$mean_bias,2)} cm"),
               x = max(data_wide$mean, na.rm=TRUE) + 2.5,
               y = agree_model$upper_ci_mean + 1,
-              size = 3,
+              size = 2,
               # parse = TRUE
     ) +
     geom_text(label = glue::glue("[95%CI: {round(agree_model$lower_ci_mean,2)}, {round(agree_model$upper_ci_mean,2)}]"),
               x = max(data_wide$mean, na.rm=TRUE) + 2.5,
               y = agree_model$upper_ci_mean + 0.25,
-              size = 3,
+              size = 2,
               # parse = TRUE
     ) +
     
@@ -192,13 +192,13 @@ make_agree_plot <- function(data, agree_model) {
     geom_text(label = glue::glue("Lower LoA = {round(agree_model$l_loa,2)} cm"),
               x = max(data_wide$mean, na.rm=TRUE) + 2.5,
               y = agree_model$lower_ci_l_loa - 1,
-              size = 3,
+              size = 2,
               # parse = TRUE
     ) +
     geom_text(label = glue::glue("[95%CI: {round(agree_model$lower_ci_l_loa,2)}, {round(agree_model$upper_ci_l_loa,2)}]"),
               x = max(data_wide$mean, na.rm=TRUE) + 2.5,
               y = agree_model$lower_ci_l_loa - 1.75,
-              size = 3,
+              size = 2,
               # parse = TRUE
     ) +
     
@@ -212,13 +212,13 @@ make_agree_plot <- function(data, agree_model) {
     geom_text(label = glue::glue("Upper LoA = {round(agree_model$u_loa,2)} cm"),
               x = max(data_wide$mean, na.rm=TRUE) + 2.5,
               y = agree_model$upper_ci_u_loa + 1,
-              size = 3,
+              size = 2,
               # parse = TRUE
     ) +
     geom_text(label = glue::glue("[95%CI: {round(agree_model$lower_ci_u_loa,2)}, {round(agree_model$upper_ci_u_loa,2)}]"),
               x = max(data_wide$mean, na.rm=TRUE) + 2.5,
               y = agree_model$upper_ci_u_loa + 0.25,
-              size = 3,
+              size = 2,
               # parse = TRUE
     ) +
     
@@ -276,13 +276,13 @@ make_reli_plot <- function(data, reli_models) {
       geom_text(label = glue::glue("Bias = {round(reli_model$mean_bias,2)} cm"),
                 x = max(data_wide$mean, na.rm=TRUE) + 2.5,
                 y = reli_model$upper_ci_mean + 1,
-                size = 3,
+                size = 2,
                 # parse = TRUE
       ) +
       geom_text(label = glue::glue("[95%CI: {round(reli_model$lower_ci_mean,2)}, {round(reli_model$upper_ci_mean,2)}]"),
                 x = max(data_wide$mean, na.rm=TRUE) + 2.5,
                 y = reli_model$upper_ci_mean + 0.25,
-                size = 3,
+                size = 2,
                 # parse = TRUE
       ) +
       
@@ -296,13 +296,13 @@ make_reli_plot <- function(data, reli_models) {
       geom_text(label = glue::glue("Lower LoA = {round(reli_model$l_loa,2)} cm"),
                 x = max(data_wide$mean, na.rm=TRUE) + 2.5,
                 y = reli_model$lower_ci_l_loa - 1,
-                size = 3,
+                size = 2,
                 # parse = TRUE
       ) +
       geom_text(label = glue::glue("[95%CI: {round(reli_model$lower_ci_l_loa,2)}, {round(reli_model$upper_ci_l_loa,2)}]"),
                 x = max(data_wide$mean, na.rm=TRUE) + 2.5,
                 y = reli_model$lower_ci_l_loa - 1.75,
-                size = 3,
+                size = 2,
                 # parse = TRUE
       ) +
       
@@ -316,13 +316,13 @@ make_reli_plot <- function(data, reli_models) {
       geom_text(label = glue::glue("Upper LoA = {round(reli_model$u_loa,2)} cm"),
                 x = max(data_wide$mean, na.rm=TRUE) + 2.5,
                 y = reli_model$upper_ci_u_loa + 1,
-                size = 3,
+                size = 2,
                 # parse = TRUE
       ) +
       geom_text(label = glue::glue("[95%CI: {round(reli_model$lower_ci_u_loa,2)}, {round(reli_model$upper_ci_u_loa,2)}]"),
                 x = max(data_wide$mean, na.rm=TRUE) + 2.5,
                 y = reli_model$upper_ci_u_loa + 0.25,
-                size = 3,
+                size = 2,
                 # parse = TRUE
       ) +
       

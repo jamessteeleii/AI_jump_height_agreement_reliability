@@ -3,7 +3,7 @@ library(targets)
 library(tarchetypes)
 source("R/functions.R")
 tar_option_set(packages = c("tidyverse", "lme4", "lmeresampler",
-                            "quarto", 
+                            "quarto", "here",
                             "patchwork"))
 
 list(
@@ -27,5 +27,7 @@ list(
   )),
 
   # Analysis and Results write up
-  tar_quarto(report, path = "report.qmd")
+  tar_quarto(report, path = "report.qmd"),
+  tar_quarto(pre_print, path = "pre_print/pre_print.qmd")
+  
 )
